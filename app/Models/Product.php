@@ -8,7 +8,7 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected $fillable = ['name', 'slug', 'description', 'price', 'stock', 'category_id'];
+    protected $fillable = ['name', 'slug', 'description', 'price', 'stock', 'sales', 'category_id'];
 
     public function category()
     {
@@ -20,13 +20,13 @@ class Product extends Model
         return $this->hasMany(ProductImage::class, 'product_id');
     }
 
-    public function reviews()
-    {
-        return $this->hasMany(Review::class, 'product_id');
-    }
-
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class, 'product_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasManyThrough(Review::class, OrderItem::class, 'product_id', 'order_item_id');
     }
 }
