@@ -14,7 +14,6 @@ return new class extends Migration
             $table->enum('payment_status', ['pending', 'paid', 'failed']);
             $table->string('transaction_id');
             $table->decimal('amount', 10, 2);
-            $table->foreignId('order_id')->constrained('orders');
             $table->timestamps();
         });
     }

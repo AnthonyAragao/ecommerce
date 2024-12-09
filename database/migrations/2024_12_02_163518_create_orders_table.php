@@ -13,6 +13,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'processing', 'completed', 'declined']);
             $table->decimal('total_price', 10, 2);
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('payment_id')->constrained('payments');
             $table->timestamps();
         });
     }
